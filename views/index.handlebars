@@ -1,0 +1,35 @@
+<div class="main-container">
+    <div class="container">
+        <div class="jumbotron mt-2">
+            <h2 class="text-center">Reddit Scraper</h2>
+            <div class="row">
+                <div class="mx-auto">
+                    <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
+                    <a href="/saved"><button type="button" class="btn btn-primary">Saved Articles</button></a>
+                    <a href="/scrape"><button href="#" type="button" class="btn btn-primary" id="newScrape">New Scrape</button></a>
+                    <button type="button" class="btn btn-primary" id="clearArticles">Clear Articles</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Subreddit</th>
+                            <th scope="col">Read</th>
+                            <th scope="col">Save</th>
+                        </tr>
+                    </thead>
+                    <tbody id="article">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
