@@ -7,6 +7,10 @@ var mongoose = require("mongoose");
 var db = require("./models");
 
 var PORT = process.env.PORT || 3000;
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+mongoose.connect(MONGODB_URI);
+
 
 // Initialize Express
 var app = express();
@@ -20,11 +24,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 
-// Connect to the Mongo DB
-mongoose.connect(
-  "mongodb://localhost/AllRedditLinks",
-  { useNewUrlParser: true }
-);
+// Connect to the Mongo DB -local
+// mongoose.connect(
+//   "mongodb://localhost/AllRedditLinks",
+//   { useNewUrlParser: true }
+// );
 
 //routes
 require("./routes/api-routes.js")(app);
