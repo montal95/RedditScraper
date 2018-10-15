@@ -59,7 +59,8 @@ module.exports = function(app) {
   });
 
   app.get("/saved", function(req, res) {
-    db.Article.find({ saved: true }).then(function(articles) {
+    db.Article.find({ saved: true }).populate("note").populate("notes._id").then(function(articles) {
+      
       console.log(articles);
       res.render("recorded", {
         save: articles
@@ -69,11 +70,14 @@ module.exports = function(app) {
 
   app.put("/article/:id", function(req, res) {
     console.log(req.params.id);
-    db.Article.findByIdAndUpdate({_id:req.params.id}, {
-      $set: {
-        saved: true
+    db.Article.findByIdAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: {
+          saved: true
+        }
       }
-    }).catch(function(err) {
+    ).catch(function(err) {
       console.log(err);
     });
   });
@@ -93,6 +97,25 @@ module.exports = function(app) {
       .catch(function(err) {
         res.json(err);
       });
+  });
+
+  app.post("/article/:id", function(req, res) {
+    db.Note.create(req.body).then(function(dbNote) {
+      // console.log(dbNote);
+      return db.Article.findOneAndUpdate(
+        {
+          "_id": req.params.id
+        },
+        { "$push": { "note": dbNote._id } },
+        { new: true }
+      )
+        .then(function(dbNote) {
+          res.json(dbNote);
+        })
+        .catch(function(err) {
+          res.json(err);
+        });
+    });
   });
 
   app.delete("/clear", function(req, res) {

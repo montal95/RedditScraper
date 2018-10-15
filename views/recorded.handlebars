@@ -20,20 +20,30 @@
                 <div class="row">
                     <button class="btn btn-primary btn-block btn-sm mt-1 mr-3 ml-3" type="button"><a href='http://www.reddit.com{{this.link}}'
                             target="_blank">Read Article <i class="fas fa-book-open"></i></a></button>
-                    <button class="btn btn-primary btn-block btn-sm mr-3 ml-3 mb-1" type="button" data-toggle="collapse" data-target="#collapseForm-{{this.id}}"
-                        aria-expanded="false" aria-controls="collapseExample">
+                    <button class="btn btn-primary btn-block btn-sm mr-3 ml-3 mb-1" type="button" data-toggle="collapse"
+                        data-target="#collapseForm-{{this.id}}" aria-expanded="false" aria-controls="collapseExample">
                         Notes <i class="fas fa-plus"></i>
                     </button>
                 </div>
             </div>
-            <div class="card collapse card-body" id="collapseForm-{{this.id}}">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Title">
-                    <input type="text" class="form-control" placeholder="Body">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="button" id="button-addon2">Submit</button>
-                    </div>
+            <div class="card collapse card-body noteForm" id="collapseForm-{{this.id}}">
+                <div id="savedNotes-{{this.id}}">
+                    {{#each note}}
+                        <br>
+                        <h4>{{this.title}}</h4>
+                        <p>{{this.body}}</p>
+                        <hr>
+                    {{/each}}
                 </div>
+                <form id="noteInput">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control noteInput" id="title-{{this.id}}" placeholder="Title">
+                        <input type="text" class="form-control noteInput" id="body-{{this.id}}" placeholder="Body">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary noteSubmit" type="button" data-id="{{this.id}}" id="button-addon2">Submit</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         {{/each}}

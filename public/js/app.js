@@ -52,7 +52,31 @@ $("#article").on("click", ".save", function() {
     method: "PUT",
     url: "/article/" + buttonId
   });
-  this.innerHTML = "<i class='fas fa-check'></i>"
+  this.innerHTML = "<i class='fas fa-check'></i>";
+});
+
+$(".noteForm").on("click", ".noteSubmit", function() {
+  // console.log($(this).attr("data-id"));
+  let articleId = $(this).attr("data-id");
+  let title = $(`#title-${articleId}`)
+    .val()
+    .trim();
+  let body = $(`#body-${articleId}`)
+    .val()
+    .trim();
+  // console.log(`${articleId}, ${title}, ${body}`);
+  $.ajax({
+    method: "POST",
+    url: "/article/" + articleId,
+    data: {
+      title: title,
+      body: body
+    }
+  }).then(function() {
+    $(`#savedNotes-${articleId}`).append(`<br><h4>${title}</h4><p>${body}</p><hr></hr>`);
+    $(`#title-${articleId}`).val("");
+    $(`#body-${articleId}`).val("");
+  });
 });
 
 getArticles();
