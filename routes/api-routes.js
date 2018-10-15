@@ -1,6 +1,7 @@
 const db = require("../models");
 const axios = require("axios");
 const cheerio = require("cheerio");
+var bodyParser = require("body-parser");
 
 //Exports all API routes to the server
 module.exports = function(app) {
@@ -63,6 +64,17 @@ module.exports = function(app) {
       res.render("recorded", {
         save: articles
       });
+    });
+  });
+
+  app.put("/article/:id", function(req, res) {
+    console.log(req.params.id);
+    db.Article.findByIdAndUpdate({_id:req.params.id}, {
+      $set: {
+        saved: true
+      }
+    }).catch(function(err) {
+      console.log(err);
     });
   });
 

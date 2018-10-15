@@ -20,9 +20,9 @@ function getArticles() {
                 <td><button type="button" class="btn btn-primary"> <a href='http://www.reddit.com${
                   data[i].link
                 }' target="_blank"><i class="fas fa-book-open"></i></a></button></td>
-                <td><button type="button" class="btn btn-primary" data-saved='${
-                  data[i].saved
-                }'>${icon}
+                <td><button type="button" class="btn btn-primary save" data-id='${
+                  data[i]._id
+                }' data-saved='${data[i].saved}'>${icon}
                 </button></td>
             </tr>
             `);
@@ -30,9 +30,9 @@ function getArticles() {
   });
 }
 
-$.getJSON("/saved",function(articles){
-    console.log(articles);
-})
+$.getJSON("/saved", function(articles) {
+  console.log(articles);
+});
 
 $("#clearArticles").on("click", function() {
   $.ajax({
@@ -43,6 +43,16 @@ $("#clearArticles").on("click", function() {
       $("#article").empty();
     }
   });
+});
+
+$("#article").on("click", ".save", function() {
+  console.log($(this).attr("data-id"));
+  let buttonId = $(this).attr("data-id");
+  $.ajax({
+    method: "PUT",
+    url: "/article/" + buttonId
+  });
+  this.innerHTML = "<i class='fas fa-check'></i>"
 });
 
 getArticles();

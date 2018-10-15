@@ -17,13 +17,14 @@
         <div class="card mb-2" id='{{this.id}}'>
             <div class="card-header">
                 <h4>{{this.title}}</h4>
-                <button class="btn btn-primary formBtn" type="button" data-toggle="collapse" data-target="#collapseForm-{{this.id}}"
-                    aria-expanded="false" aria-controls="collapseExample">
-                    <i class="fas fa-plus"></i>
-                </button>
-                <button class="btn btn-primary formBtn mr-2" type="button"><a href='http://www.reddit.com{{this.link}}'
-                        target="_blank"><i class="fas fa-book-open"></i></a></button>
-
+                <div class="row">
+                    <button class="btn btn-primary btn-block btn-sm mt-1 mr-3 ml-3" type="button"><a href='http://www.reddit.com{{this.link}}'
+                            target="_blank">Read Article <i class="fas fa-book-open"></i></a></button>
+                    <button class="btn btn-primary btn-block btn-sm mr-3 ml-3 mb-1" type="button" data-toggle="collapse" data-target="#collapseForm-{{this.id}}"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Notes <i class="fas fa-plus"></i>
+                    </button>
+                </div>
             </div>
             <div class="card collapse card-body" id="collapseForm-{{this.id}}">
                 <div class="input-group mb-3">
