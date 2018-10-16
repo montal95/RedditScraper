@@ -16,3 +16,16 @@ a:hover{
     background-position: center;
     background-size: contain;
 }
+
+.main-container{
+    margin-top: 70px;
+    margin-bottom: 60px;
+}
+
+.footer{
+    height: 56px;
+    background-color: #f8f9fa!important;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
