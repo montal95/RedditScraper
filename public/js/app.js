@@ -43,6 +43,7 @@ $("#clearArticles").on("click", function() {
       $("#article").empty();
     }
   });
+  document.location.href = "/";
 });
 
 $("#article").on("click", ".save", function() {
@@ -72,11 +73,34 @@ $(".noteForm").on("click", ".noteSubmit", function() {
       title: title,
       body: body
     }
-  }).then(function() {
-    $(`#savedNotes-${articleId}`).append(`<br><h4>${title}</h4><p>${body}</p><hr></hr>`);
+  }).then(function(data) {
+    // console.log(JSON.stringify(data) + "\n info for delete button")
+    let noteId = data.note.length - 1;
+    $(`#savedNotes-${articleId}`).append(`
+    <tr id="${data.note[noteId]}">
+      <td>${title}</td>
+      <td>${body}</td>
+      <td><button type="button" id="delete" data-id="${
+        data.note[noteId]
+      }" class="btn btn-danger float-right">X</button></td>
+    </tr>`);
     $(`#title-${articleId}`).val("");
     $(`#body-${articleId}`).val("");
   });
+});
+
+$(".savedNoteArea").on("click", "#delete", function() {
+  console.log(this);
+  let noteId = $(this).attr("data-id");
+  $.ajax({
+    method: "DELETE",
+    dataType: "json",
+    url: "/clear/" + noteId
+    }
+  ).then(function(data){
+    console.log(data);
+    $(`#${noteId}`).remove();
+  })
 });
 
 getArticles();

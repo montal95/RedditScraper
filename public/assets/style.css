@@ -10,3 +10,9 @@ a:hover{
     float: right;
 }
 
+.jumbotron{
+    background-image: url("https://www.gamersnexus.net/images/media/logos/misc/reddit-logo-gray.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}

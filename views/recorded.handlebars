@@ -1,15 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">reddit Scraper</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/scrape">Scrape</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/saved">Saved</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="clearArticles" href="/">Clear All</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <div class="main-container">
     <div class="container">
         <div class="jumbotron mt-2">
-            <h2 class="text-center">Reddit Scraper</h2>
-            <div class="row">
-                <div class="mx-auto">
-                    <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
-                    <a href="/saved"><button type="button" class="btn btn-primary">Saved Articles</button></a>
-                    <a href="/scrape"><button href="#" type="button" class="btn btn-primary" id="newScrape">New Scrape</button></a>
-                    <button type="button" class="btn btn-primary" id="clearArticles">Clear Articles</button>
-                </div>
-            </div>
+            <h2 class="text-center">reddit Scraper</h2>
         </div>
     </div>
     <div class="container" id="savedList">
@@ -27,13 +45,23 @@
                 </div>
             </div>
             <div class="card collapse card-body noteForm" id="collapseForm-{{this.id}}">
-                <div id="savedNotes-{{this.id}}">
-                    {{#each note}}
-                        <br>
-                        <h4>{{this.title}}</h4>
-                        <p>{{this.body}}</p>
-                        <hr>
-                    {{/each}}
+                <div>
+                    <table class="table">
+                        <thead>
+                            <th scope="col">Title</th>
+                            <th scope="col">Body</th>
+                            <th scope="col" style="text-align: right">Delete</th>
+                        </thead>
+                        <tbody class="savedNoteArea" id="savedNotes-{{this.id}}">
+                        {{#each note}}
+                        <tr id="{{this._id}}">
+                            <td>{{this.title}}</td>
+                            <td>{{this.body}}</td>
+                            <td><button type="button" id="delete" data-id="{{this._id}}" class="btn btn-danger float-right">X</button></td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
                 </div>
                 <form id="noteInput">
                     <div class="input-group mb-3">

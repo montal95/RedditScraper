@@ -128,4 +128,17 @@ module.exports = function(app) {
       }
     });
   });
+
+  app.delete("/clear/:id", function(req, res){
+    db.Note.remove({
+      "_id":req.params.id
+    }, function(err, response){
+      if(err){
+        console.log(err);
+      } else{
+        console.log(response);
+        res.json(response);
+      }
+    })
+  })
 };
